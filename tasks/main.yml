@@ -1,0 +1,26 @@
+- assert:
+    msg: "'{{ ooo_cc_container_runtime }}' is not a supported container runtime. Only {{ ooo_cc_valid_runtimes | join(', ') }} are supported."
+    that:
+      - ooo_cc_container_runtime in ooo_cc_valid_runtimes
+  tags:
+    - ooo_cc
+    - always
+    - validate
+
+- name: Check for container runtime
+  command: which {{ ooo_cc_container_runtime }}
+  changed_when: no
+  check_mode: no
+  tags:
+    - ooo_cc
+    - always
+    - validate
+
+- name: Ensure config output dir exists
+  file:
+    path: "{{ ooo_cc_config_path }}"
+    state: directory
+  tags:
+    - ooo_cc
+
+- include_tasks: "{{ ooo_cc_container_runtime }}.yaml"

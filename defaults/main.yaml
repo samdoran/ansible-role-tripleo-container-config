@@ -1,0 +1,11 @@
+ooo_cc_container_runtime: docker
+ooo_cc_config_path: "{{ playbook_dir }}/generated_config"
+ooo_cc_containers: []
+  # - name: config-cron
+  #   image: registry.access.redhat.com/rhosp13/openstack-cron:13.0-51
+  #   keep_volumes: no    # Optional
+  #   auto_remove: yes    # Optional
+  #   pull: no            # Optional
+  #   playbook_name: cron
+  #   volumes:
+  #     - '{{ playbook_dir }}:/project:rw'

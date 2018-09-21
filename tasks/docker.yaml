@@ -1,0 +1,11 @@
+- name: DOCKER | Generate config inside container
+  docker_container:
+    name: "{{ item.name }}"
+    image: "{{ item.image }}"
+    state: started
+    keep_volumes: "{{ item.keep_volumes | default('no') }}"
+    auto_remove: "{{ item.auto_remove | default('yes') }}"
+    pull: "{{ item.pull | default('no') }}"
+    command: ansible-playbook /project/playbooks/config/{{ item.playbook_name | default(item.name) }}.yaml
+    volumes: "{{ item.volumes | default(omit) }}"
+  loop: "{{ ooo_cc_containers }}"
